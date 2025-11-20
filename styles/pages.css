@@ -1,0 +1,195 @@
+/* ------------------------------
+Neon AI Tech - Optimized CSS
+Combines pages.css + ui-neon.css
+------------------------------ */
+
+/* ---------- Base Utilities ---------- */
+:root {
+--neon-primary: #7c3aed;
+--neon-accent: #06b6d4;
+--neon-bright: #00eaff;
+--text: #061029;
+--muted: #425067;
+--glass-blur: 12px;
+}
+
+body {
+background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.06), transparent 8%),
+linear-gradient(180deg,#f7f9fb 0%, rgba(4,6,12,0.02) 100%);
+color: var(--text);
+font-family: Inter, ui-sans-serif, system-ui;
+line-height:1.45;
+}
+
+/* Layout & Helpers */
+.center { display:flex; align-items:center; justify-content:center; }
+.muted { color: var(--muted); }
+.page-container { max-width: 1200px; margin:auto; padding:28px 20px; }
+.kicker { font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+
+/* ---------- Typography ---------- */
+.page-title { font-size:1.8rem; font-weight:800; margin-bottom:12px; color:var(--neon-primary); letter-spacing:-0.02em; text-shadow:0 6px 18px rgba(124,58,237,0.06); }
+.section-title { font-size:1.6rem; font-weight:800; color:var(--text); }
+.section-sub { color: var(--muted); margin-top:6px; }
+
+/* ---------- Inputs / Selects ---------- */
+.search-input, .select-input {
+min-width:200px; max-width:420px;
+border-radius:12px; padding:10px 12px;
+background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border:1px solid rgba(255,255,255,0.04);
+color: var(--text);
+outline:none; font-size:.95rem;
+backdrop-filter: blur(var(--glass-blur));
+box-shadow: 0 8px 30px rgba(3,6,12,0.12);
+transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.search-input::placeholder, .select-input::placeholder { color: rgba(255,255,255,0.4); }
+.search-input:focus, .select-input:focus {
+transform:translateY(-3px);
+border-color: rgba(124,58,237,0.5);
+box-shadow: 0 18px 50px rgba(124,58,237,0.06), 0 8px 30px rgba(6,182,212,0.04);
+}
+
+/* ---------- Hero Sections ---------- */
+.hero-left { padding:6px; }
+.hero-title { font-size:2.6rem; font-weight:900; background:linear-gradient(90deg,var(--neon-primary),var(--neon-bright)); -webkit-background-clip:text; color:transparent; margin-bottom:8px; }
+.hero-sub { color:var(--muted); margin-bottom:18px; }
+.hero-cta, .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:18px; }
+
+.neo-hero { display:grid; grid-template-columns:1fr 460px; gap:28px; align-items:center; padding:56px 0; position:relative; }
+@media(max-width:840px) { .neo-hero { grid-template-columns:1fr; padding:32px 0; } }
+
+/* Hero 3D / Glow */
+.hero-right { position:relative; height:340px; display:flex; align-items:center; justify-content:center; perspective:1100px; }
+.hero-glow { position:absolute; width:560px; height:560px; border-radius:50%; filter:blur(60px); background: radial-gradient(circle at 30% 30%, rgba(124,58,237,0.12), transparent 18%), radial-gradient(circle at 70% 70%, rgba(6,182,212,0.09), transparent 18%); z-index:0; pointer-events:none; }
+.hero-card.neo-card { position:absolute; width:260px; height:160px; border-radius:14px; z-index:2; }
+.hero-card.card-a { transform: translate3d(-120px,-18px,40px) rotateY(-12deg) rotateZ(-6deg); }
+.hero-card.card-b { transform: translate3d(0,8px,60px) rotateY(6deg) rotateZ(6deg); width:300px; height:180px; }
+.hero-card.card-c { transform: translate3d(120px,38px,20px) rotateY(-6deg) rotateZ(-3deg); }
+
+/* ---------- Cards / Grid ---------- */
+.cards-grid, .intern-grid, .tools-grid, .stats-grid { display:grid; gap:16px; margin-top:18px; }
+.cards-grid { grid-template-columns:1fr; }
+.intern-grid { grid-template-columns:1fr; }
+.tools-grid { grid-template-columns:1fr; }
+.stats-grid { grid-template-columns:1fr; }
+@media(min-width:720px) { .cards-grid, .intern-grid { grid-template-columns: repeat(2,1fr); } .tools-grid { grid-template-columns: repeat(3,1fr); } .stats-grid { grid-template-columns: repeat(3,1fr); } }
+@media(min-width:1100px) { .cards-grid { grid-template-columns: repeat(3,1fr); } }
+
+/* ---------- Neon Cards Base ---------- */
+.neo-card {
+border-radius:14px;
+background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border:1px solid rgba(255,255,255,0.04);
+box-shadow:0 24px 80px rgba(3,6,12,0.5);
+padding:16px;
+backdrop-filter: blur(var(--glass-blur));
+transition: transform .18s ease, box-shadow .22s ease;
+}
+.neo-card:hover { transform:translateY(-10px); box-shadow:0 40px 120px rgba(3,6,12,0.6); }
+
+/* ---------- Course Cards ---------- */
+.course-card { display:flex; flex-direction:column; border-radius:12px; overflow:hidden; }
+.course-card .thumb { position:relative; height:160px; overflow:hidden; }
+.course-card .thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s cubic-bezier(.2,.9,.2,1); }
+.course-card:hover .thumb img { transform:scale(1.06) translateY(-6px); }
+.thumb-badge { position:absolute; left:14px; top:14px; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color:white; font-weight:700; font-size:.82rem; box-shadow:0 8px 30px rgba(99,102,241,0.12); }
+.course-content { padding:14px; display:flex; flex-direction:column; gap:8px; }
+.course-content h3 { margin:0; font-weight:800; color:var(--text); }
+.course-content p.muted { color:var(--muted); margin:0; }
+.course-footer { display:flex; justify-content:space-between; align-items:center; margin-top:auto; gap:10px; }
+.enroll-btn { background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color:white; padding:8px 12px; border-radius:10px; border:none; font-weight:800; box-shadow:0 12px 40px rgba(124,58,237,0.08); }
+
+/* ---------- Interns / Tools ---------- */
+.intern-card, .tool-card { padding:16px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.03); transition: transform .16s ease, box-shadow .18s ease; }
+.intern-card h3, .tool-card h3 { margin:0; color:var(--text); }
+.intern-card p, .tool-card p { margin:4px 0 8px 0; color:var(--muted); }
+.intern-info { display:flex; gap:10px; align-items:center; color:var(--muted); font-weight:600; }
+.intern-card .mode { display:inline-block; padding:6px 10px; border-radius:999px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+
+/* ---------- Stats ---------- */
+.stat-card { padding:18px; text-align:center; border-radius:12px; }
+.stat-number { font-size:1.8rem; font-weight:900; color:var(--neon-primary); }
+
+/* ---------- Contact ---------- */
+.contact-container { max-width:920px; margin:22px auto; padding:18px; }
+.contact-form { display:grid; gap:12px; margin-top:12px; }
+.contact-form input, .contact-form textarea { border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); color:var(--text); outline:none; resize:vertical; }
+.contact-form textarea { min-height:140px; max-height:360px; }
+.contact-form button[type="submit"] { margin-top:6px; width:220px; padding:10px 14px; border-radius:10px; background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color:white; font-weight:700; border:none; box-shadow:0 12px 40px rgba(124,58,237,0.08); }
+
+
+/* ---------- Login Modal ---------- */
+.login-page { max-width:760px; margin:36px auto; text-align:center; padding:22px; }
+.login-btn { padding:10px 14px; border-radius:10px; background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color:white; font-weight:700; border:none; }
+.modal-overlay { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); }
+.login-modal { width:420px; padding:20px; border-radius:14px; background: linear-gradient(180deg, rgba(8,8,12,0.92), rgba(12,12,20,0.9)); border:1px solid rgba(124,58,237,0.12); position:relative; }
+.login-modal .close-x { position:absolute; right:18px; top:18px; background:transparent; border:none; color:var(--muted); }
+
+/* ---------- Footer ---------- */
+/* ---------- Footer ---------- */
+.neo-footer {
+margin-top: 40px;
+padding: 18px 8px;
+background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+border-top: 1px solid rgba(255,255,255,0.02);
+}
+
+.neo-footer-inner {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+gap: 12px;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+
+.footer-links {
+display: flex;
+gap: 16px;
+}
+
+.footer-links a {
+text-decoration: none;
+color: var(--text);
+font-weight: 600;
+transition: all 0.18s ease;
+}
+
+.footer-links a:hover {
+color: white;
+text-shadow: 0 0 6px var(--neon-primary), 0 0 12px var(--neon-accent);
+transform: translateY(-2px);
+}
+
+/* muted text */
+.muted {
+color: var(--muted);
+font-size: 0.85rem;
+}
+
+/* responsive */
+@media(max-width: 720px) {
+.neo-footer-inner {
+flex-direction: column;
+align-items: center;
+gap: 12px;
+}
+.footer-links { justify-content: center; }
+}
+
+/* ---------- Animations ---------- */
+.pulse { animation: neonPulse 2.8s ease-in-out infinite; }
+@keyframes neonPulse { 0% { box-shadow:none } 50% { box-shadow:0 20px 80px rgba(124,58,237,0.12), 0 0 40px rgba(6,182,212,0.04); } 100% { box-shadow:none } }
+
+/* ---------- Responsive ---------- */
+@media(max-width:720px) {
+.neo-header-inner { padding:0 6px; }
+.hero-right { display:none; }
+.course-card .thumb img { height:140px; }
+.contact-container { padding:12px; }
+.search-input, .select-input { width:100%; min-width:auto; }
+.hero-actions { flex-direction:column; align-items:stretch; }
+}

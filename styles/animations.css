@@ -1,0 +1,73 @@
+/* -----------------------------------------------
+   MERGED MASTER CSS (WORKSPACE)
+   -----------------------------------------------
+   Paste ALL your raw CSS blocks here (Part 1 / Part 2 / Part 3)
+   and I will clean + optimize + merge it inside this same file.
+   ----------------------------------------------- */
+
+/* -----------------------------------------------
+   ANIMATIONS (Optimized & Deduplicated)
+----------------------------------------------- */
+
+/* Scroll Reveal */
+.hidden-reveal {
+  opacity: 0;
+  transform: translateY(18px) scale(.995);
+  transition: opacity .7s cubic-bezier(.2,.9,.2,1),
+              transform .7s cubic-bezier(.2,.9,.2,1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Neon Pulse */
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 0 rgba(124, 58, 237, 0);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 24px 90px rgba(124, 58, 237, 0.10),
+                0 0 40px rgba(0, 234, 255, 0.05);
+    transform: translateY(-6px);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(124, 58, 237, 0);
+    transform: translateY(0);
+  }
+}
+
+.pulse {
+  animation: neonPulse 3s ease-in-out infinite;
+}
+
+/* Floating Slow */
+@keyframes floatSlow {
+  0%   { transform: translateY(0) rotate(-1deg); }
+  50%  { transform: translateY(-14px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(-1deg); }
+}
+
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Slide Down Helper */
+.slide-down {
+  transform-origin: top;
+}
+
+/* Cyberpunk Scanlines */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 100% 6px;
+  mix-blend-mode: overlay;
+  opacity: 0.06;
+}
+
