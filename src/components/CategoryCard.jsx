@@ -1,4 +1,5 @@
 import React from "react";
+// No change needed here, scroll handled by wrapping component (Home.jsx)
 
 export default function CategoryCard({ title, icon }) {
   // Changed .card to .neo-card for Glassmorphism/Neon style

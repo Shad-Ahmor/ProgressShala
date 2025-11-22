@@ -3,66 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkillMaster Academy</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-
-    <!-- SEO -->
-    <meta
+    <title>ProgressShala</title> <link rel="icon" type="image/png" href="/logo/ps.png" /> <meta
       name="description"
-      content="SkillMaster Academy – Professional courses, internships and productivity tools for students."
-    />
+      content="ProgressShala – Professional courses, internships and productivity tools for students." />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    
+    <link rel="stylesheet" href="/src/style.css">
+    
+    <script src="/src/theme.js"></script>
 
-    <!-- Auto Theme Script -->
-    <script>
-      // Set theme at document load before rendering to avoid flicker
-      (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemPrefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-
-        let theme = "light";
-
-        if (savedTheme === "dark" || savedTheme === "light") {
-          theme = savedTheme;
-        } else if (systemPrefersDark) {
-          theme = "dark";
-        }
-
-        document.documentElement.classList.remove("light", "dark");
-        document.documentElement.classList.add(theme);
-      })();
-    </script>
-
-    <!-- Toggle Theme Helper -->
-    <script>
-      function toggleTheme() {
-        const current = document.documentElement.classList.contains("dark")
-          ? "dark"
-          : "light";
-        const next = current === "dark" ? "light" : "dark";
-
-        document.documentElement.classList.remove("light", "dark");
-        document.documentElement.classList.add(next);
-
-        localStorage.setItem("theme", next);
-      }
-    </script>
   </head>
 
   <body>
-
-
     <div id="root"></div>
 
     <script type="module" src="/src/main.jsx"></script>

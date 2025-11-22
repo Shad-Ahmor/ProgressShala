@@ -1,38 +1,44 @@
 /* ------------------------------------------------
-   ✅ FINAL CONSOLIDATED MASTER CSS (NO RULES MISSING)
-   ------------------------------------------------
-   - Includes ALL styles from previous iterations.
-   - Corrected Theme Switching Logic (Dark/Light Mode).
-   - Dynamic Background Gradients and Glass Effects Fixed.
------------------------------------------------- */
+   ✅ FINAL CONSOLIDATED MASTER CSS (IMPROVED & ANIMATED)
+   ------------------------------------------------ */
 
 /* #################################################
-   SECTION 1: Variables & Base
+   SECTION 1: Variables & Base Reset
    ################################################# */
 
 :root {
   /* ------------------ Dark Mode (Default) ------------------ */
-  --neon-primary: #7c3aed; 
-  --neon-accent: #06b6d4; 
-  --neon-bright: #00eaff;
+  --neon-primary: #7c3aed; /* Deep Purple (Original) */
+  --neon-accent: #06b6d4; /* Cyan (Original) */
+  --neon-bright: #00eaff; /* Bright Cyan (Original) */
+  --neon-glow-strong: #00eaff;
+  --neon-glow-deep: #7c3aed;
   --neon-blue: var(--neon-accent);
   --neon-purple: var(--neon-primary);
+  --header-grad-1: rgba(17, 1, 58, 0.8);  /* Primary Purple (Semi-transparent) */
+  --header-grad-2: rgba(1, 51, 58, 0.8);   /* Accent Cyan (Semi-transparent) */
+  --header-grad-3: rgba(72, 1, 77, 0.9);   /* Neon Pink (Semi-transparent) */
 
-  /* Colors */
+  /* 🛑 DYNAMIC COLORS */
+  --logo-mark-text: #031021; /* Logo mark text color (Dark Text on Neon BG) */
+  --logo-mark-bg: linear-gradient(90deg, var(--neon-bright), var(--neon-primary));
+  --hero-title-gradient: linear-gradient(990deg, #ffbfbf, #92ecf8, #fffcc0, var(--text));
   --text: #ffffff;
   --muted: #a0a0a0;
-  
+  --bg-footer: linear-gradient(120deg, #001f26, #012153, #2d044d, #3c0947);;
   /* Background & Glass Surfaces */
   --bg-color-main: #0a0a14; /* Deep Base Color */
   --bg-color-surface: rgba(30, 30, 44, 0.85); /* Card/Input/Footer Base */
-  --header-bg: rgba(30, 30, 44, 0.9); 
   
-  /* Gradients & Glows (Used in body background and shadows) */
-  --dark-gradient-start: rgba(124, 58, 237, 0.12); /* Purple Spot */
-  --dark-gradient-end: rgba(6, 182, 212, 0.08);   /* Cyan Spot */
+  /* Subtle Background Gradients (Apple-like) */
+  --apple-gradient-dark-1: radial-gradient(100% 100% at 50% 0%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+  --apple-gradient-dark-2: radial-gradient(100% 100% at 50% 100%, rgba(6, 182, 212, 0.04) 0%, transparent 50%);
+  --apple-linear-gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(0, 0, 0, 0.03) 100%);
+  
+  /* Shadow & Glow */
+  --shadow-main: 0 10px 40px rgba(0, 0, 0, 0.3);
   --neon-glow-primary: rgba(124, 58, 237, 0.3); 
   --neon-glow-accent: rgba(6, 182, 212, 0.3);
-  --shadow-main: 0 10px 40px rgba(0, 0, 0, 0.3);
   
   /* UI Constants */
   --glass-blur: 16px; 
@@ -41,288 +47,497 @@
   --transition: var(--transition-speed) ease;
 }
 
+/* ------------------ Light Mode Override ------------------ */
 .light {
-  /* ------------------ Light Mode Override ------------------ */
+  --neon-primary: #7c3aed; 
+  --neon-accent: #06b6d4; 
+  --neon-bright: #00eaff; 
+  
+  --neon-blue: var(--neon-accent);
+  --neon-purple: var(--neon-primary);
+  --header-grad-1: rgba(240, 231, 255, 0.8);  /* Primary Purple (Semi-transparent) */
+  --header-grad-2: rgba(208, 249, 255, 0.4);   
+  --header-grad-3: rgba(246, 216, 234, 0.3);
+  
+  --bg-footer: linear-gradient(90deg, #e7f6f9, #eaf0f5, #eaedf2, #f3eef3);
+  /* 🔥 MODIFIED: Light Mode Logo Mark BG (Brighter Gradient) */
+  --logo-mark-text: #ffffff; /* Brighter background पर सफेद टेक्स्ट */
+  --logo-mark-bg: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
+
+  --hero-title-gradient: linear-gradient(90deg, #6d28d9, #0891b2, #06b6d4, var(--text));
+  --apple-gradient-light-1: radial-gradient(100% 100% at 50% 0%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+  --apple-gradient-light-2: radial-gradient(100% 100% at 50% 100%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
+  --apple-linear-gradient-light: linear-gradient(180deg, rgba(0, 0, 0, 0.005) 0%, rgba(0, 0, 0, 0.02) 100%);
+
   --text: #061029;
   --muted: #425067;
   
-  /* Background & Glass Surfaces */
-  --bg-color-main: #f7f9fb; /* Light Base Color */
-  --bg-color-surface: rgba(255, 255, 255, 0.85); /* Card/Input/Footer Base */
-  --header-bg: rgba(255, 255, 255, 0.9); 
-  
-  /* Gradients & Glows (Lighter spots and shadows) */
-  --light-gradient-start: rgba(124, 58, 237, 0.05); 
-  --light-gradient-end: rgba(6, 182, 212, 0.03);   
+  --bg-color-main: #f7f9fb; 
+  --bg-color-surface: rgba(255, 255, 255, 0.85); /* Light Glass */
+
   --neon-glow-primary: rgba(124, 58, 237, 0.1); 
   --neon-glow-accent: rgba(6, 182, 212, 0.05);
   --shadow-main: 0 10px 40px rgba(0, 0, 0, 0.1);
+  
+  /* 🔥 NEW LIGHT MODE FOOTER SHADOW */
+  --footer-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05), 0 -2px 10px rgba(6, 182, 212, 0.05);
 }
 
 /* ------------------------------------------------
-   ✅ BASE STYLING (Body with Dynamic Gradients)
+   BASE STYLING (Body, Fonts, Layout)
    ------------------------------------------------ */
+* {
+    box-sizing: border-box; 
+}
+
 body {
-  /* Dynamic Background Logic (Dark Mode) */
   background-color: var(--bg-color-main); 
   background-image: 
-    radial-gradient(1400px 800px at 10% 10%, var(--dark-gradient-start), transparent 8%),
-    radial-gradient(1400px 800px at 90% 90%, var(--dark-gradient-end), transparent 8%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(4, 6, 12, 0.05) 100%); /* Layer 2: Subtle Linear Gradient */
+    var(--apple-gradient-dark-1),
+    var(--apple-gradient-dark-2),
+    var(--apple-linear-gradient-dark);
 
   color: var(--text); 
-  font-family: Inter, ui-sans-serif, system-ui;
+  /* 🛑 Apple-style font stack */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.45;
   transition: background-color var(--transition), color var(--transition); 
+  min-height: 100vh; 
 }
 
 .light body {
-  /* Light Mode Background Logic */
-  background-color: var(--bg-color-main); 
   background-image: 
-    radial-gradient(1400px 800px at 10% 10%, var(--light-gradient-start), transparent 8%),
-    radial-gradient(1400px 800px at 90% 90%, var(--light-gradient-end), transparent 8%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.03) 100%);
+    var(--apple-gradient-light-1),
+    var(--apple-gradient-light-2),
+    var(--apple-linear-gradient-light);
 }
 
-/* Layout & Helpers */
+/* 🚀 #root पर ग्रेडिएंट स्टाइल */
+#root {
+
+    background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2), var(--header-grad-3));
+
+    margin: 0px !important;
+}
+
+/* Typography & Layout */
+.page-container { max-width: 1200px; margin: auto; padding: 32px 24px; }
 .center { display: flex; align-items: center; justify-content: center; }
 .muted { color: var(--muted); }
-.page-container { max-width: 1200px; margin: auto; padding: 32px 24px; }
-.kicker { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-
-/* Typography */
-.page-title { 
-  font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; 
-  color: var(--neon-primary); letter-spacing: -0.02em; 
-  text-shadow: 0 6px 18px rgba(124,58,237,0.06); 
+.page-title, .h1 { 
+    font-size: clamp(1.8rem, 4.2vw, 2.8rem); 
+    font-weight: 800; 
+    margin-bottom: 12px; 
+    color: var(--neon-primary); 
+    letter-spacing: -0.02em; 
+    text-shadow: 0 6px 18px rgba(124,58,237,0.06); 
 }
-.h1 { font-size: clamp(1.6rem, 4.2vw, 2.8rem); font-weight: 900; line-height: 1.02; margin-bottom: 8px; }
 .section-title { font-size: 1.8rem; font-weight: 800; color: var(--text); margin-bottom: 20px; }
 .section-sub { color: var(--muted); margin-top: 6px; }
 .lead { font-size: 1.05rem; color: var(--muted); }
+.kicker { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 
 
 /* #################################################
-   SECTION 2: UI Components (Header, Buttons, Inputs, Cards)
+   SECTION 2: UI Components (Glassmorphism & Neon)
    ################################################# */
 
-/* ---------- Header (neo-header) - ENHANCED GLOSS/GLOW ---------- */
+/* ---------- Header (neo-header) - Used for STICKY header on all non-hero pages ---------- */
 .neo-header {
   position: sticky; top: 12px;
   z-index: 140; margin: 16px 24px;
   border-radius: var(--radius-lg); 
   padding: 12px 24px; 
-  background: var(--header-bg); 
+  
+  /* Dark Mode Default */
+  background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2), var(--header-grad-3));
+
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Default Dark Border */
-  box-shadow: var(--shadow-main), 0 0 10px var(--neon-glow-primary); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: var(--shadow-main); 
   display: flex; justify-content: center;
   transition: all var(--transition-speed) ease;
 }
 
+
+@keyframes headerGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🔥 FIX: Light Mode Header needs explicit gradient redefinition */
 .light .neo-header {
-  border: 1px solid rgba(0, 0, 0, 0.08); /* Light Border */
+  /* सुनिश्चित करें कि Light Mode के वेरिएबल्स का उपयोग करके ग्रेडिएंट ओवरराइड हो */
+  background: linear-gradient(135deg, var(--header-grad-1), var(--header-grad-2), var(--header-grad-3));
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Light border */
   box-shadow: var(--shadow-main), 0 0 5px var(--neon-glow-primary);
 }
 
+
 .neo-header-inner {
   width: 100%; max-width: 1200px;
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; /* This spaces out Logo, Nav, and Controls */
+  display: flex; align-items: center; justify-content: space-between; 
   gap: 16px;
 }
-.neo-controls { 
-  display: flex; 
-  gap: 10px; 
-  align-items: center; /* This places controls (Login, Theme, Menu) side-by-side */
-}
-.logo { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--neon-primary); font-weight: 800; }
+.logo { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--text); font-weight: 800; }
+
+/* 🔥 LOGO MARK (PS) - Compatible with Dark/Light Mode */
 .logo-mark {
-  font-size: 1.2rem; transform: rotate(-8deg); width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center;
-  background: linear-gradient(90deg, #00eaff, #7c3aed); color: #031021;
+  /* 💡 Base Styles */
+  font-size: 1.2rem; 
+  transform: rotate(-8deg); 
+  width: 42px; 
+  height: 42px; 
+  border-radius: 10px; 
+  display: grid; 
+  place-items: center;
+  font-weight: 900; 
+  letter-spacing: -0.05em;
+  transition: all var(--transition-speed) ease;
+
+  /* 🛑 Dark Mode Default */
+  background: var(--logo-mark-bg); /* linear-gradient(90deg, var(--neon-bright), var(--neon-primary)) */
+  color: var(--logo-mark-text); /* #031021 */
 }
 
-/* Navigation */
-.neo-nav { display: flex; gap: 16px; align-items: center; transition: all 0.2s ease; }
-.neo-nav a {
-  color: var(--text); padding: 8px 12px; border-radius: 10px; font-weight: 600; 
-  transition: all 0.18s ease;
-}
-.neo-nav a:hover {
-  color: white; background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
-  box-shadow: 0 0 15px var(--neon-glow-primary), 0 10px 40px rgba(99,102,241,0.2); 
-  transform: translateY(-3px); 
+/* 🔥 LIGHT MODE Override for Logo Mark */
+.light .logo-mark {
+  /* Light Mode के वेरिएबल्स (var(--logo-mark-bg) और var(--logo-mark-text)) का उपयोग करें */
+  background: var(--logo-mark-bg); /* linear-gradient(90deg, var(--neon-primary), var(--neon-accent)) */
+  color: var(--logo-mark-text); /* #ffffff */
 }
 
-
-/* Theme Toggle Button FIX */
+.neo-controls { display: flex; gap: 10px; align-items: center; }
 .theme-toggle {
   border-radius: 10px; padding: 8px; background: transparent; 
-  border: 1px solid var(--muted); /* Using muted for border */
+  border: 1px solid var(--muted); 
   color: var(--text); cursor: pointer; 
   transition: all 0.2s ease;
 }
-.theme-toggle:hover,
-.theme-toggle:focus { 
+.theme-toggle:hover { 
   background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
-  color: white; 
-  transform: translateY(-2px); 
-  box-shadow: 0 8px 30px rgba(99,102,241,0.12), 0 0 10px rgba(0, 234, 255, 0.3); 
+  color: white; transform: translateY(-2px); 
+  box-shadow: 0 8px 30px rgba(99,102,241,0.12), 0 0 10px var(--neon-bright); 
   outline: none; 
 }
+/* 🔥 REMOVED: .menu-btn (Mobile menu button) */
 
-.menu-btn { 
-  display: none; background: transparent; padding: 8px; border-radius: 10px; 
-  border: 1px solid rgba(255,255,255,0.03); cursor: pointer; 
-}
-.menu-btn:hover {
-  background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
-  color: white; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.12);
-}
-
-/* ---------- Buttons (btn / enroll-btn) ---------- */
-.btn { cursor: pointer; border: 0; padding: 10px 14px; border-radius: 12px; font-weight: 700; transition: transform .18s ease, box-shadow .18s ease; }
-.btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); color: #031022; box-shadow: 0 12px 44px rgba(124, 58, 237, 0.08); }
-.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 18px 70px rgba(124, 58, 237, 0.12); }
-.btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255, 255, 255, 0.04); }
-
-/* Primary Neon Button (ENHANCED GLOW) */
-.enroll-btn {
-  background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
-  color: white; padding: 8px 14px; border-radius: 10px; border: none; font-weight: 800; 
-  box-shadow: 0 12px 40px rgba(124,58,237,0.2), 0 0 20px var(--neon-bright); 
-  transition: all 0.2s ease;
-}
-.enroll-btn:hover {
-  transform: translateY(-4px); 
-  box-shadow: 0 20px 60px rgba(124,58,237,0.3), 0 0 30px var(--neon-bright);
+/* ---------- NEW: Minimal Transparent Header Overlay for Home Page Hero Section (HomeHeader.jsx component will use this) ---------- */
+.hero-header-overlay {
+    position: absolute; /* Relative to the .full-width-hero-content section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px clamp(24px, 5vw, 40px); /* Increased responsive padding */
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
-/* ---------- Inputs (search-input / input) ---------- */
-.search-input, .select-input {
-  min-width: 200px; max-width: 420px; border-radius: 12px; padding: 10px 12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.04); color: var(--text); outline: none; font-size: .95rem;
-  backdrop-filter: blur(var(--glass-blur)); box-shadow: 0 8px 30px rgba(3,6,12,0.12);
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-}
-.search-input::placeholder, .select-input::placeholder { color: rgba(255,255,255,0.4); }
-.search-input:focus, .select-input:focus {
-  transform: translateY(-3px); border-color: rgba(124,58,237,0.5);
-  box-shadow: 0 18px 50px rgba(124,58,237,0.06), 0 8px 30px rgba(6,182,212,0.04);
+.hero-header-inner {
+    width: 100%; 
+    max-width: 1200px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 16px;
 }
 
-.input { width: 100%; padding: 12px 14px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255, 255, 255, 0.04); color: var(--text); transition: box-shadow var(--transition), transform var(--transition); }
-.input:focus { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(124, 58, 237, 0.06); }
+.hero-header-overlay .theme-toggle {
+    /* Subtle border for transparent header */
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+}
 
-/* ---------- Cards (neo-card) - ENHANCED GLOW/LIFT ---------- */
+
+/* ---------- Cards (neo-card, card) ---------- */
 .neo-card { 
   border-radius: var(--radius-lg); 
   background: var(--bg-color-surface); 
   border: 1px solid rgba(255,255,255,0.1); 
-  box-shadow: var(--shadow-main), 0 0 10px var(--neon-glow-primary); 
+  box-shadow: var(--shadow-main); 
   padding: 22px; 
   backdrop-filter: blur(var(--glass-blur));
   transition: transform 0.3s ease-out, box-shadow 0.4s ease;
 }
-
 .light .neo-card {
   border: 1px solid rgba(0,0,0,0.08); 
   box-shadow: var(--shadow-main), 0 0 5px var(--neon-glow-primary);
 }
-
 .neo-card:hover { 
   transform: translateY(-12px); 
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.4), 0 0 30px var(--neon-glow-primary); 
 }
-
-.card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: var(--radius-lg); padding: 18px; border: 1px solid rgba(255, 255, 255, 0.04); box-shadow: 0 20px 60px rgba(3,6,12,0.5); transition: transform var(--transition), box-shadow var(--transition); }
+.card { /* Fallback/Alternate Card Style */
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); 
+    border-radius: var(--radius-lg); padding: 18px; 
+    border: 1px solid rgba(255, 255, 255, 0.04); 
+    box-shadow: 0 20px 60px rgba(3,6,12,0.5); 
+    transition: transform var(--transition), box-shadow var(--transition); 
+}
 .card:hover { transform: translateY(-6px); box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5); }
 
 
+/* ---------- Buttons (btn / enroll-btn) ---------- */
+.btn { cursor: pointer; border: 0; padding: 10px 14px; border-radius: 12px; font-weight: 700; transition: transform .18s ease, box-shadow .18s ease; }
+.btn-primary { 
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); 
+    color: #031022; 
+    box-shadow: 0 12px 44px rgba(124, 58, 237, 0.08); 
+}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 18px 70px rgba(124, 58, 237, 0.12); }
+.btn-ghost { 
+    background: transparent; 
+    color: var(--text); 
+    border: 1px solid rgba(255, 255, 255, 0.04); 
+    backdrop-filter: blur(8px); /* 💡 IMPROVEMENT: Subtle glass on ghost button */
+}
+.enroll-btn {
+  background: linear-gradient(90deg, var(--neon-primary), var(--neon-accent));
+  color: white; padding: 8px 14px; border-radius: 10px; border: none; font-weight: 800; 
+  /* 🛑 ENHANCED GLOW: More prominent box shadow */
+  box-shadow: 0 12px 40px rgba(124,58,237,0.4), 0 0 20px var(--neon-bright); 
+  transition: all 0.2s ease;
+}
+.enroll-btn:hover {
+  transform: translateY(-4px); 
+  box-shadow: 0 20px 60px rgba(124,58,237,0.6), 0 0 30px var(--neon-bright);
+}
+
+/* ---------- Inputs (search-input / input) ---------- */
+.search-input, .select-input, .input {
+  min-width: 200px; max-width: 420px; border-radius: 12px; padding: 12px 14px; /* 💡 Uniform padding */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04); color: var(--text); outline: none; font-size: .95rem;
+  backdrop-filter: blur(8px); /* 💡 Slightly less blur for inputs */
+  box-shadow: 0 8px 30px rgba(3,6,12,0.12);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  width: 100%; /* Ensure inputs take full width of container */
+}
+.search-input::placeholder, .select-input::placeholder { color: rgba(255,255,255,0.4); }
+.search-input:focus, .select-input:focus, .input:focus {
+  transform: translateY(-3px); border-color: var(--neon-primary); /* 💡 Primary color border on focus */
+  box-shadow: 0 18px 50px rgba(124,58,237,0.2), 0 8px 30px rgba(6,182,212,0.1);
+}
+
+
 /* #################################################
-   SECTION 3: Page Specific Styles
+   SECTION 3: Page Specific Layouts
    ################################################# */
+/* SECTION 3: Page Specific Layouts */
 
-/* ---------- Hero (neo-hero) ---------- */
-.neo-hero { display: grid; grid-template-columns: 1fr 460px; gap: 28px; align-items: center; padding: 56px 0; position: relative; }
-.hero-left { padding: 6px; }
-.hero-title { font-size: 2.6rem; font-weight: 900; background: linear-gradient(90deg,var(--neon-primary),var(--neon-bright)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 8px; }
-.hero-sub { color: var(--muted); margin-bottom: 18px; }
-.hero-cta, .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 18px; }
+.hero-full-width-section {
+  width: 100%;
+  min-height: 100vh; 
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden; 
+  
+  /* ✅ MAKE IT FLEX CONTAINER */
+  display: flex;
+  align-items: center; /* लंबवत सेंटरिंग (Vertical Centering) */
+  justify-content: center; /* क्षैतिज सेंटरिंग (Horizontal Centering) */
+}
 
-/* Hero 3D / Glow */
-.hero-right { position: relative; height: 340px; display: flex; align-items: center; justify-content: center; perspective: 1100px; }
-.hero-glow { position: absolute; width: 560px; height: 560px; border-radius: 50%; filter: blur(60px); background: radial-gradient(circle at 30% 30%, rgba(124,58,237,0.12), transparent 18%), radial-gradient(circle at 70% 70%, rgba(6,182,212,0.09), transparent 18%); z-index: 0; pointer-events: none; }
-.scanlines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 100% 6px; mix-blend-mode: overlay; opacity: 0.06; }
-.hero-card.neo-card { position: absolute; width: 260px; height: 160px; border-radius: 14px; z-index: 2; }
-.hero-card.card-a { transform: translate3d(-120px,-18px,40px) rotateY(-12deg) rotateZ(-6deg); }
-.hero-card.card-b { transform: translate3d(0,8px,60px) rotateY(6deg) rotateZ(6deg); width: 300px; height: 180px; }
-.hero-card.card-c { transform: translate3d(120px,38px,20px) rotateY(-6deg) rotateZ(-3deg); }
+
+/* 🔥 FIX 2: full-width-hero-content को पूरी जगह लेने दें */
+.full-width-hero-content {
+  /* height: 100%;*//* इसे हटा दें, क्योंकि पेरेंट कंटेनर पहले ही इसे सेंटर कर रहा है */
+  width: 100%; 
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* 🔥 FIX 3: .hero-center का टॉप मार्जिन हटाएं (क्योंकि hero-full-width-section सेंटर कर रहा है) */
+.hero-center { 
+  max-width: 900px; 
+  text-align: center; 
+  padding: 0 24px; 
+  margin: 0 auto; /* क्षैतिज सेंटरिंग */
+  /* (React कंपोनेंट में दिया गया marginTop: '80px' अब आवश्यक नहीं होगा) */
+}
+
+.hero-title { 
+  font-size: clamp(2.8rem, 6.5vw, 4.5rem); 
+  font-weight: 700; 
+  letter-spacing: -0.02em; 
+  background: var(--hero-title-gradient); 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+  color: transparent; 
+  line-height: 1.05;
+  margin-bottom: 12px; 
+  text-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+.hero-sub { 
+  color: var(--muted); 
+  margin-bottom: 24px; 
+  max-width: 600px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta, .hero-actions { 
+  display: flex; 
+  gap: 12px; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  justify-content: center; 
+  margin-top: 18px; 
+}
+
 
 /* ---------- Course Cards ---------- */
 .course-card { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; }
 .course-card .thumb { position: relative; height: 180px; overflow: hidden; } 
 .course-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.9,.2,1); }
 .course-card:hover .thumb img { transform: scale(1.06) translateY(-6px); }
-.thumb-badge { position: absolute; left: 14px; top: 14px; padding: 6px 10px; border-radius: 999px; background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color: white; font-weight: 700; font-size: .82rem; box-shadow: 0 8px 30px rgba(99,102,241,0.12); }
+.thumb-badge { 
+    position: absolute; left: 14px; top: 14px; padding: 6px 10px; border-radius: 999px; 
+    background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); 
+    color: white; font-weight: 700; font-size: .82rem; 
+    box-shadow: 0 8px 30px rgba(99,102,241,0.12); 
+}
 .course-content { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
 .course-content h3 { margin: 0; font-weight: 800; color: var(--text); }
 .course-content p.muted { color: var(--muted); margin: 0; }
 .course-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 10px; }
 
+
 /* ---------- Internships & Tools ---------- */
-.intern-card, .tool-card { padding: 16px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.03); transition: transform .16s ease, box-shadow .18s ease; }
+.intern-card, .tool-card { 
+    padding: 16px; border-radius: 12px; 
+    /* 💡 IMPROVEMENT: Consistent glass base for intern/tool cards */
+    background: var(--bg-color-surface); 
+    border: 1px solid rgba(255,255,255,0.03); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    transition: transform .16s ease, box-shadow .18s ease; 
+    display: block; /* Ensure tool-card link behaves like a block */
+}
+.intern-card:hover, .tool-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 15px var(--neon-glow-accent);
+}
 .intern-card h3, .tool-card h3 { margin: 0; color: var(--text); }
 .intern-card p, .tool-card p { margin: 4px 0 8px 0; color: var(--muted); }
 .intern-info { display: flex; gap: 10px; align-items: center; color: var(--muted); font-weight: 600; }
 .intern-card .mode { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); }
 
+
 /* ---------- Stats ---------- */
-.stat-card { padding: 18px; text-align: center; border-radius: 12px; }
-.stat-number { font-size: 2.2rem; font-weight: 900; color: var(--neon-primary); text-shadow: 0 0 12px rgba(124, 58, 237, 0.5); } 
+.stat-card { 
+  padding: 18px; 
+  text-align: center; 
+  border-radius: 12px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+.stat-number { 
+  font-size: 2.2rem; 
+  font-weight: 900; 
+  color: var(--neon-primary); 
+  text-shadow: 0 0 12px rgba(124, 58, 237, 0.5); 
+} 
+.stat-icon-wrapper {
+  background: rgba(255, 255, 255, 0.04); 
+  padding: 12px;
+  border-radius: 50%;
+  margin-bottom: 10px; 
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  transition: transform 0.3s ease;
+}
+.stat-card:hover .stat-icon-wrapper {
+  transform: translateY(-5px); 
+}
+.light .stat-icon-wrapper {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 
 /* ---------- Contact Form ---------- */
 .contact-container { max-width: 920px; margin: 22px auto; padding: 18px; }
 .contact-form { display: grid; gap: 12px; margin-top: 12px; }
-.contact-form input, .contact-form textarea { border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.04); background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); color: var(--text); outline: none; resize: vertical; }
-.contact-form textarea { min-height: 140px; max-height: 360px; }
-.contact-form button[type="submit"] { margin-top: 6px; width: 220px; padding: 10px 14px; border-radius: 10px; background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color: white; font-weight: 700; border: none; box-shadow: 0 12px 40px rgba(124,58,237,0.08); }
+/* Form inputs reuse .search-input style */
+
 
 /* ---------- Login Modal ---------- */
-.login-page { max-width: 760px; margin: 36px auto; text-align: center; padding: 22px; }
-.login-btn { padding: 10px 14px; border-radius: 10px; background: linear-gradient(90deg,var(--neon-primary),var(--neon-accent)); color: white; font-weight: 700; border: none; }
-.modal-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
-.login-modal { width: 420px; padding: 20px; border-radius: 14px; background: linear-gradient(180deg, rgba(8,8,12,0.92), rgba(12,12,20,0.9)); border: 1px solid rgba(124,58,237,0.12); position: relative; }
-.login-modal .close-x { position: absolute; right: 18px; top: 18px; background: transparent; border: none; color: var(--muted); }
+.login-modal {
+    position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; 
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+}
+.login-box { /* This is the actual modal card */
+    width: 420px; padding: 20px; border-radius: 14px; 
+    background: linear-gradient(180deg, rgba(8,8,12,0.92), rgba(12,12,20,0.9)); 
+    border: 1px solid rgba(124,58,237,0.12); 
+    position: relative; 
+    box-shadow: 0 20px 80px rgba(0,0,0,0.8), 0 0 20px var(--neon-glow-primary); /* 💡 Modal Glow */
+}
+.login-modal .close-x { position: absolute; right: 18px; top: 18px; background: transparent; border: none; color: var(--muted); cursor: pointer; }
 
-/* ---------- Footer - ENHANCED GLOSS/GLOW ---------- */
+
+/* ---------- Footer ---------- */
 .neo-footer {
   margin-top: 60px; 
   padding: 24px 8px; 
-  background: var(--bg-color-surface);
-  border-top: 1px solid rgba(255,255,255,0.1);
+  /* 🔥 FIX: Default (Dark) Mode के लिए स्पष्ट रूप से BG, Border, Shadow परिभाषित करें */
+  background: var(--bg-footer); /* Dark Glass */
+  border-top: 1px solid rgba(255,255,255,0.1); /* Dark Border */
   backdrop-filter: blur(8px);
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05), 0 -2px 10px var(--neon-glow-accent);
 }
 
 .light .neo-footer {
-  border-top: 1px solid rgba(0,0,0,0.08);
+  /* 🔥 FIX: Light Mode के लिए background, border और shadow को ओवरराइड करें */
+  border-top: 1px solid rgba(0,0,0,0.08); /* Light Border */
+  /* 🔥 NEW SHADOW: लाइट मोड में शैडो को और हल्का बनाएं ताकि यह सफेद BG के साथ विसंगत न लगे */
+  --footer-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05), 0 -2px 10px rgba(6, 182, 212, 0.05);
+  box-shadow: var(--footer-shadow); 
 }
 
 .neo-footer-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 8px 24px; }
 .footer-links { display: flex; gap: 16px; }
 .footer-links a { text-decoration: none; color: var(--text); font-weight: 600; transition: all 0.18s ease; }
-.footer-links a:hover { color: var(--neon-primary); text-shadow: 0 0 8px var(--neon-primary); transform: translateY(-2px); }
+.footer-links a:hover, .footer-links a.active { 
+    color: var(--neon-primary); text-shadow: 0 0 8px var(--neon-primary); 
+    transform: translateY(-2px); 
+}
 
 
 /* #################################################
-   SECTION 4: Animations & Responsive Overrides
+   SECTION 4: Animations, Transitions & Grids
    ################################################# */
 
-/* ---------- Scroll Reveal & Float Animations ---------- */
+/* ---------- Scroll Reveal (Vaulta Style) ---------- */
+/* 🛑 BASE CLASS: Applied to the element before it enters the viewport */
+.stagger-reveal {
+  opacity: 0;
+  /* Vaulta uses a slight 3D rotation and translation for depth */
+  transform: translateY(30px) rotateX(2deg); 
+  
+  /* Smoother cubic-bezier for a snappier feel */
+  transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.2, 0.6, 0.3, 1);
+  
+  /* Custom property controlled by React for staggered delay */
+  transition-delay: var(--stagger-delay, 0s); 
+  
+  transform-style: preserve-3d; /* Helps 3D transform */
+}
+
+/* 🛑 REVEALED CLASS: Applied by Intersection Observer (React/JS) */
+.stagger-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* 💡 Legacy Classes (Kept for compatibility) */
 .hidden-reveal {
   opacity: 0; transform: translateY(18px) scale(.995);
   transition: opacity .7s cubic-bezier(.2,.9,.2,1), transform .7s cubic-bezier(.2,.9,.2,1);
@@ -330,22 +545,15 @@ body {
 .reveal-visible { opacity: 1; transform: translateY(0) scale(1); }
 .slide-down { transform-origin: top; }
 
+
 /* ---------- Neon Pulse Animation ---------- */
 @keyframes neonPulse {
-  0% { box-shadow: 0 0 0 rgba(124, 58, 237, 0); transform: translateY(0); }
-  50% { 
-    box-shadow: 0 24px 90px rgba(124, 58, 237, 0.10), 0 0 40px rgba(0, 234, 255, 0.05);
-    transform: translateY(-6px);
-  }
-  100% { box-shadow: 0 0 0 rgba(124, 58, 237, 0); transform: translateY(0); }
-  /* Duplicates for full fidelity */
-  0% { box-shadow: none; } 
+  0%, 100% { box-shadow: none; } 
   50% { box-shadow: 0 20px 80px rgba(124,58,237,0.12), 0 0 40px rgba(6,182,212,0.04); }
-  100% { box-shadow: none; }
 }
-.pulse { animation: neonPulse 3s ease-in-out infinite; }
+.pulse { animation: neonPulse 3s ease-in-out infinite; transform-origin: center; }
 
-/* Floating Slow */
+/* ---------- Floating Slow ---------- */
 @keyframes floatSlow {
   0% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-14px) rotate(1deg); }
@@ -353,14 +561,7 @@ body {
 }
 .float-slow { animation: floatSlow 6s ease-in-out infinite; transform-origin: center; }
 
-/* Cyberpunk Scanlines */
-.scanlines {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 100% 6px; mix-blend-mode: overlay; opacity: 0.06;
-}
-
-/* Grid Layouts (Generic and Component Specific) */
+/* ---------- Grid Layouts ---------- */
 .grid { display: grid; gap: 22px; } 
 .cards-grid, .intern-grid, .tools-grid, .stats-grid { 
   display: grid; gap: 16px; margin-top: 18px; 
@@ -370,7 +571,9 @@ body {
 .stats-grid { display:grid; gap:12px; grid-template-columns: repeat(1,1fr); }
 
 
-/* ########## Responsive Overrides ########## */
+/* #################################################
+   SECTION 5: Responsive Overrides
+   ################################################# */
 
 @media(min-width: 720px) { 
   .cards-grid, .intern-grid { grid-template-columns: repeat(2, 1fr); } 
@@ -380,34 +583,27 @@ body {
   .cards-grid { grid-template-columns: repeat(3, 1fr); } 
 }
 
-/* Medium Screens (<= 880px / 840px) */
-@media(max-width: 880px) {
-  .page-container { padding: 20px; }
-}
-
 @media(max-width: 840px) {
   .neo-header { margin: 12px; padding: 10px 16px; }
-  .neo-nav { display: none; }
-  .menu-btn { display: inline-flex; }
-  .neo-nav.open { 
-    display: flex; position: absolute; right: 12px; top: 64px; 
-    background: var(--bg-color-surface); 
-    border: 1px solid var(--muted);
-    padding: 14px; border-radius: 10px; 
-    flex-direction: column; gap: 12px; 
-    box-shadow: var(--shadow-main); 
+
+  /* Adjust 100vh hero height for sticky header on mobile */
+  .full-width-hero-content {
+      height: calc(100vh - 80px); 
   }
-  .neo-hero { grid-template-columns: 1fr; padding: 32px 0; }
-  .hero-right { display: none; }
+
   .neo-footer-inner { flex-direction: column; align-items: center; gap: 12px; }
   .footer-links { justify-content: center; }
 }
 
-/* Small Screens (<= 720px) */
 @media(max-width: 720px) {
   .neo-header-inner { padding: 0 6px; }
   .course-card .thumb img { height: 140px; }
   .contact-container { padding: 12px; }
   .search-input, .select-input { width: 100%; min-width: auto; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions { flex-direction: row; justify-content: center; }
+  
+  /* NEW: Mobile adjustment for hero-header-overlay */
+  .hero-header-overlay {
+      padding: 16px 20px;
+  }
 }

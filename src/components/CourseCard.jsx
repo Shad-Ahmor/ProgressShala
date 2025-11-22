@@ -1,4 +1,5 @@
 import React from "react";
+// No change needed here, scroll handled by wrapping component (Home.jsx or Courses.jsx)
 
 export default function CourseCard({ data }) {
 const { title, description, thumbnail, level, duration } = data;

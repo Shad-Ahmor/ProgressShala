@@ -1,5 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
+// No Scroll Reveal needed for Modal
 
 export default function LoginModal({ onClose = () => {} }) {
   return (
