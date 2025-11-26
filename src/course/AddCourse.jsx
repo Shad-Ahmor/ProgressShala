@@ -5,7 +5,6 @@ import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import AddSectionToCourse from './AddSectionToCourse';
 import AddLesson from './AddLesson';
-import { decryptData } from '../security/cryptoUtils';
 import CourseAccordion from './CourseAccordion';
 
 const AddCourse = ({sessionRef}) => {

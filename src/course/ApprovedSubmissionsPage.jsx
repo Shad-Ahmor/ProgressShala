@@ -7,7 +7,7 @@ import {
   Paper, Card
 } from '@mui/material';
 import { CheckCircle, Cancel, HourglassEmpty } from '@mui/icons-material';
-import ShineBorder from '../Main/ShineBorder';
+import ShineBorder from '../main/ShineBorder';
 
 const ApprovedSubmissionsPage = () => {
   const [approvedTasks, setApprovedTasks] = useState([]);

@@ -3,7 +3,7 @@ import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Grid, Typography, Box, CircularProgress, Select, MenuItem, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Card } from '@mui/material';
 import { CheckCircle, Warning, Cancel, HourglassEmpty, Pending } from '@mui/icons-material'; // Icons for status
-import ShineBorder from '../Main/ShineBorder';
+import ShineBorder from '../main/ShineBorder';
 
 const ReviewSubmissionPage = () => {
   const [assignedTasks, setAssignedTasks] = useState([]);

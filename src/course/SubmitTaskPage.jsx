@@ -7,7 +7,7 @@ import moment from 'moment'; // Optional if you want to format dates
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
-import ShineBorder from '../Main/ShineBorder';
+import ShineBorder from '../main/ShineBorder';
 
 const SubmitTaskPage = () => {
   const [assignedTasks, setAssignedTasks] = useState([]);
