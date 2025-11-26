@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 // Components
 import Footer from "./components/Footer";
 import RoutesConfig from "./main/RoutesConfig";
-import Login from "./Auth/Login";
+import Login from "./auth/Login";
 
 export default function App() {
 // --- Global App State ---
