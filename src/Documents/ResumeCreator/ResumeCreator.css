@@ -1,0 +1,306 @@
+/* ResumeCreator.css - Professional and Light Design */
+
+/* ---------------------------------------------------- */
+/* 1. Global & Background Styles */
+/* ---------------------------------------------------- */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Professional sans-serif font */
+}
+
+.creator-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Soft, professional light blue gradient */
+    background: linear-gradient(135deg, #f0f4f8, #e7edf3, #dce3eb); 
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Subtle 3D Background Elements (Soft, light colors) */
+.creator-container::before,
+.creator-container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5; /* Reduced opacity */
+    filter: blur(100px); /* More blur for a softer glow */
+}
+
+.creator-container::before {
+    width: 350px;
+    height: 350px;
+    background-color: #bbdefb; /* Light Sky Blue */
+    top: -80px;
+    left: -80px;
+    animation: moveCircles 18s infinite alternate ease-in-out;
+}
+
+.creator-container::after {
+    width: 450px;
+    height: 450px;
+    background-color: #c8e6c9; /* Light Mint Green */
+    bottom: -100px;
+    right: -100px;
+    animation: moveCircles 22s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes moveCircles {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, -60px) scale(1.05); }
+}
+
+/* ---------------------------------------------------- */
+/* 2. Main Card Styling (Sharp & Clean) */
+/* ---------------------------------------------------- */
+.main-card {
+    background: #ffffff; 
+    border-radius: 16px; /* Slightly less rounded */
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Lighter, professional shadow */
+    text-align: center;
+    max-width: 650px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    border: 1px solid #e0e0e0; /* Clean border */
+}
+
+.main-title {
+    font-size: 2.8em;
+    font-weight: 700;
+    color: #1a202c; /* Darker text for professionalism */
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.main-subtitle {
+    font-size: 1.1em;
+    color: #4a5568;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------------------------------- */
+/* 3. Button Group Styling */
+/* ---------------------------------------------------- */
+
+
+.create-button::before {
+    content: '✨';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+.create-button span {
+    padding-left: 20px; 
+}
+
+
+.preview-button::before {
+    content: '👁️'; /* Eye icon */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+.preview-button span {
+    padding-left: 20px;
+}
+
+/* Back Button for internal views */
+.back-button-common {
+    display: block;
+    margin-bottom: 25px;
+    padding: 10px 20px;
+    background-color: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.back-button-common:hover {
+    background-color: #edf2f7;
+    transform: translateY(-1px);
+}
+
+/* Responsive Adjustments (Same as before, ensuring mobile usability) */
+@media (max-width: 768px) {
+    .main-card {
+        padding: 30px;
+    }
+    .main-title {
+        font-size: 2em;
+    }
+    .action-button {
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .create-button span, .preview-button span {
+        padding-left: 20px;
+    }
+}
+.content-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 900px; /* Adjust as needed */
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* ---------------------------------------------------- */
+/*  BEAUTIFUL DELUXE BUTTON STYLE (APPLY TO ALL BUTTONS) */
+/* ---------------------------------------------------- */
+
+.action-button {
+    font-size: 1.15em;
+    font-weight: 600;
+    padding: 16px 34px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.7px;
+
+    /* Glass effect */
+    backdrop-filter: blur(6px);
+
+    /* Glow shadow */
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+
+    transition: all 0.35s ease;
+}
+
+
+
+
+
+
+
+
+
+.action-button svg {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    position: relative;
+    top: 1px;
+}
+
+.action-button span {
+    position: relative;
+    z-index: 2;
+}
+
+/* -------------------------------------------- */
+/* Mobile Responsive                            */
+/* -------------------------------------------- */
+
+@media (max-width: 768px) {
+  .action-button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 14px 20px;
+  }
+}
+
+/* Hover = lift + glow + shine */
+.action-button:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.55);
+}
+
+/* Shine animation */
+.action-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 120%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.22);
+    transform: skewX(-20deg);
+    transition: 0.4s;
+    opacity: 0;
+}
+
+.action-button:hover::after {
+    left: 120%;
+    opacity: 1;
+}
+
+/* ----------------------------------------- */
+/* CREATE BUTTON – Blue Royal Gradient       */
+/* ----------------------------------------- */
+.create-button {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+}
+.create-button:hover {
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.55);
+}
+
+/* ----------------------------------------- */
+/* PREVIEW BUTTON – Emerald Glow             */
+/* ----------------------------------------- */
+.preview-button {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 6px 18px rgba(5, 150, 105, 0.4);
+}
+.preview-button:hover {
+    box-shadow: 0 12px 28px rgba(5, 150, 105, 0.55);
+}
+
+/* ----------------------------------------- */
+/* ATS BUTTON – Purple Premium Gradient      */
+/* ----------------------------------------- */
+.ats-button {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.4);
+}
+.ats-button:hover {
+    box-shadow: 0 12px 28px rgba(124, 58, 237, 0.55);
+}
+
+/* -------------------------------------------- */
+/* Button Inner Icon + Text Alignment Fix      */
+/* -------------------------------------------- */
+
+
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 600px; /* keeps buttons aligned neatly */
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+/* Responsive: stack buttons vertically on mobile */
+@media (max-width: 768px) {
+    .button-group {
+        grid-template-columns: 1fr; /* stack vertically */
+        gap: 15px;
+    }
+}

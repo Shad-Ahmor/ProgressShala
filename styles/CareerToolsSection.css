@@ -1,0 +1,174 @@
+/* -----------------------------------------------
+   🌟 Career Tools Section — Responsive Day/Night + Neon Glass
+-------------------------------------------------- */
+
+.career-tools-container {
+  width: 100%;
+  padding: 1cqw 20px;
+  text-align: center;
+  max-width: 1400px;
+  margin: auto;
+}
+.career-tools-container  .tools-grid {
+  display: grid;
+  gap: 10px; /* reduce gap to fit more cards */
+  grid-template-columns: repeat(4, 1fr) !important; /* 4 cards per row */
+  padding: 0 10px;
+}
+
+.tool-card {
+  padding: 10px 12px; /* slightly smaller padding */
+  height: 220px;      /* reduce height */
+  border-radius: 16px; /* slightly smaller corners */
+}
+
+
+
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(130deg, var(--neon-primary), var(--neon-accent), var(--neon-bright));
+  background-size: 300% 300%;
+  animation: borderMove 6s infinite linear;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: 0.35s ease;
+}
+
+.tool-card:hover::before {
+  opacity: 1;
+}
+
+.tool-card:hover {
+  transform: translateY(-6px) scale(1.035) rotateX(3deg);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2),
+              0 0 40px rgba(0, 255, 255, 0.12);
+}
+
+.tool-gradient {
+  position: absolute;
+  inset: -20px;
+  opacity: 0.15;
+  z-index: -1;
+  filter: blur(25px);
+  transition: 0.3s ease;
+}
+
+.tool-card:hover .tool-gradient {
+  opacity: 0.25;
+  filter: blur(35px);
+}
+
+.tool-icon-box {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 18px;
+  font-size: 25px;
+  background: linear-gradient(135deg, var(--neon-primary), var(--neon-accent), var(--neon-bright));
+  background-size: 400% 400%;
+  animation: iconGradient 6s ease infinite;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #fff;
+
+  box-shadow: 0 0 12px var(--neon-glow-primary),
+              inset 0 0 16px rgba(255, 255, 255, 0.2);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tool-card:hover .tool-icon-box {
+  transform: scale(1.12) rotateZ(4deg);
+  box-shadow: 0 0 22px var(--neon-glow-primary),
+              inset 0 0 18px rgba(255, 255, 255, 0.25);
+}
+
+
+
+
+.tool-title {
+  margin-top: 16px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px var(--neon-glow-primary);
+}
+
+.tool-desc {
+  margin: 8px 0 16px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4rem;
+  text-align: center;
+}
+
+.tool-btn {
+  margin-top: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.88);
+  color: #111;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 6px var(--neon-glow-primary);
+}
+
+.tool-btn:hover {
+  background: var(--neon-bright);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px var(--neon-bright);
+}
+
+/* ------------------------------------------------
+   🌟 ANIMATIONS
+-------------------------------------------------- */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes borderMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes iconGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ------------------------------------------------
+   🌟 RESPONSIVE
+-------------------------------------------------- */
+
+
+
+
+
+/* Responsive tweaks */
+@media (max-width: 1100px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-card { height: 220px; padding: 16px 12px; }
+  .tool-icon-box { width: 50px; height: 50px; font-size: 24px; }
+  .tool-title { font-size: 1.05rem; }
+  .tool-desc { font-size: 0.8rem; }
+  .tool-btn { padding: 5px 12px; font-size: 0.75rem; }
+}

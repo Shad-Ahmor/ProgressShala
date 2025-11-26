@@ -1,0 +1,162 @@
+/*
+  ==========================================
+  ORGANIZATION TREE STYLES (FINAL & CORRECTED)
+  ==========================================
+*/
+
+/* 1. Root Container for Horizontal Scroll (100+ Employees) */
+.hierarchyRoot {
+    padding: 20px;
+    overflow-x: auto; 
+    min-width: 100%;
+}
+
+/* --- Tree Node Styling --- */
+.treeNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
+  width: max-content; 
+}
+
+/* --- Card Styling (No Change) --- */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  margin-bottom: 20px;
+  z-index: 2; 
+  border: 1px solid transparent; 
+}
+
+/* Current User Highlight */
+.card.current-user {
+    border: 2px solid #38c172;
+    background-color: #f0fff4;
+    box-shadow: 0 0 10px rgba(56, 193, 114, 0.5);
+}
+
+.imageContainer { margin-right: 12px; }
+.image { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #3498db; }
+.card.current-user .image { border-color: #38c172; }
+.cardContent { flex: 1; }
+.name { font-size: 16px; font-weight: bold; }
+.role { font-size: 14px; color: #666; }
+
+/* --- Toggle Button Styling (No Change) --- */
+.toggleButton {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  position: absolute;
+  top: 100%; 
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: -10px; 
+  z-index: 10;
+}
+
+/* Centered Card Header Styling (No Change) */
+.cardHeader {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Children Nodes Styling */
+.childrenContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 30px;
+  position: relative;
+  width: max-content; 
+}
+
+/* 1. Vertical Line (Parent to Horizontal Connector) */
+.verticalLine {
+  width: 2px;
+  background-color: #605f5f;
+  height: 50px; 
+  position: absolute;
+  top: -20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Child Nodes (horizontal arrangement) */
+.childNodes {
+    display: flex !important;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* FIX: यहां width: max-content रखें */
+    width: max-content; 
+    /* ✅ NEW: Gap from React is now handled visually */
+}
+
+/* 🛑 FINAL FIX: Horizontal Connector Line */
+.childNodes::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    height: 2px;
+    background-color: #575757;
+    z-index: 0;
+    
+    /* ✅ SOLUTION: Line को पहले child के केंद्र से आखिरी child के केंद्र तक फैलाएं */
+    /* Child node की चौड़ाई: 250px. Gap: 40px. ChildWidth/2 = 125px. Gap/2 = 20px */
+    
+    /* Line शुरू: पहले Child के केंद्र से 40px gap का आधा (20px) बाहर */
+    left: calc(125px + 20px); 
+    
+    /* Line समाप्त: आखिरी Child के केंद्र से 40px gap का आधा (20px) बाहर */
+    right: calc(125px + 20px);
+    
+    /* NOTE: यह तभी काम करेगा जब सभी कार्ड्स की चौड़ाई 250px (min-width) हो। 
+       यदि 1 या 2 बच्चे हों, तो भी यह लाइन केवल बीच में दिखेगी। */
+}
+
+/* 3. Child Node Wrapper (अब यह map के अंदर का div है) */
+.childNodes > div {
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding-top: 20px; /* Child Line के लिए जगह */
+    position: relative;
+}
+
+/* 4. Child Card के ऊपर की Vertical Line (Horizontal line से Card तक) */
+.childNodes > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px; /* horizontal line से child card तक */
+    background-color: #ccc;
+    z-index: 1;
+}
+
+/* Adjust the margin for the nested child nodes */
+.childNodes .treeNode {
+  margin-left: 0;
+  margin-top: 20px;
+}

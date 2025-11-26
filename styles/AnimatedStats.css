@@ -1,0 +1,61 @@
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 28px;
+  margin-top: 20px;
+}
+
+
+
+.stat-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 40px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.muted {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+/* ------------------- Particles ------------------- */
+.stat-particles {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.stat-particles .particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  opacity: 0.25;
+  animation: floatParticle 4s ease-in-out infinite;
+}
+
+.stat-particles .particle.small { width: 3px; height: 3px; }
+.stat-particles .particle.big { width: 8px; height: 8px; }
+
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-6px) translateX(4px); }
+}
+
+/* ------------------- Fade Animations ------------------- */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

@@ -1,68 +1,64 @@
-// components/AnimatedStats.jsx
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
-// Lucide Icons का उपयोग करें (मान लें कि यह इंस्टॉल है)
-import { Rocket, Briefcase, Users } from "lucide-react"; 
+import { Rocket, Briefcase, Users } from "lucide-react";
+import "../../styles/AnimatedStats.css";
 
 export default function AnimatedStats({ items = null }) {
-  // 💡 Default Items में Icon और color prop जोड़ा गया
   const defaultItems = items || [
-    { 
-      title: "Career Success", 
-      stat: "95%", 
-      icon: Briefcase, 
-      color: "#06b6d4" // Neon Accent
-    },
-    { 
-      title: "Internship Network", 
-      stat: "200+", 
-      icon: Rocket, 
-      color: "#7c3aed" // Neon Primary
-    },
-    { 
-      title: "Active Learners", 
-      stat: "50K+", 
-      icon: Users, 
-      color: "#00eaff" // Neon Bright
-    }
+    { title: "Career Success", stat: "95%", icon: Briefcase, color: "#06b6d4" },
+    { title: "Internship Network", stat: "200+", icon: Rocket, color: "#7c3aed" },
+    { title: "Active Learners", stat: "50K+", icon: Users, color: "#00eaff" },
   ];
 
   return (
-    <div className="stats-grid" style={{ marginTop: 28 }}>
-      {defaultItems.map((it, idx) => {
-        const IconComponent = it.icon; 
-        
-        // 🔥 MODIFIED: delay prop added to ScrollReveal
-        const staggerDelay = idx * 0.15 + 0.1; // 0.1s, 0.25s, 0.4s...
-        
-        return (
-          <ScrollReveal key={idx} delay={staggerDelay}>
-            <div className="stat-card neo-card">
-              {/* 1. Icon Section (Top) */}
-              <div 
-                className="stat-icon-wrapper" 
-                style={{ marginBottom: 10, color: it.color }}
-              >
-                <IconComponent size={30} strokeWidth={2.5} />
+    <section className="neo-section">
+      <ScrollReveal delay={0.1}>
+        <h2 className="section-title">
+          🌟 Career Achievements
+        </h2>
+        <p className="section-subtitle">
+          See what our learners achieve and the impact we create
+        </p>
+      </ScrollReveal>
+
+      <div className="stats-grid">
+        {defaultItems.map((it, idx) => {
+          const IconComponent = it.icon;
+          const staggerDelay = idx * 0.15 + 0.1;
+
+          return (
+            <ScrollReveal key={idx} delay={staggerDelay}>
+              <div className="stat-card neo-card">
+                {/* 🔹 Particle Glow */}
+                <div className="stat-particles">
+                  <span className="particle small" style={{ top: "15%", left: "25%" }}></span>
+                  <span className="particle" style={{ top: "70%", left: "60%" }}></span>
+                  <span className="particle big" style={{ top: "40%", left: "80%" }}></span>
+                </div>
+
+                {/* Icon */}
+                <div className="stat-icon-wrapper" style={{ color: it.color }}>
+                  <IconComponent size={40} strokeWidth={2.5} />
+                </div>
+
+                {/* Stat Number */}
+                <div
+                  className="stat-number"
+                  style={{
+                    color: it.color,
+                    textShadow: `0 0 12px ${it.color}50, 0 0 25px ${it.color}30`,
+                  }}
+                >
+                  {it.stat}
+                </div>
+
+                {/* Title */}
+                <div className="muted">{it.title}</div>
               </div>
-              
-              {/* 2. Stat Number */}
-              <div 
-                className="stat-number"
-                style={{ 
-                  color: it.color, 
-                  textShadow: `0 0 10px ${it.color}30` // हल्का ग्लो इफेक्ट
-                }}
-              >
-                {it.stat}
-              </div>
-              
-              {/* 3. Title */}
-              <div className="muted">{it.title}</div>
-            </div>
-          </ScrollReveal>
-        );
-      })}
-    </div>
+            </ScrollReveal>
+          );
+        })}
+      </div>
+    </section>
   );
 }

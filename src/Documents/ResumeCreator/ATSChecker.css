@@ -1,0 +1,21 @@
+/* ATS Button (Orange / Gold for attention) */
+.ats-button {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+.ats-button:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #d97706, #f59e0b);
+  box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+}
+.ats-button::before {
+  content: '📊';
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+.ats-button span {
+  padding-left: 20px;
+}

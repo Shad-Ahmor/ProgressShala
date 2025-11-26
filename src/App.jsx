@@ -1,44 +1,143 @@
-import React from "react";
-import { BrowserRouter , Routes, Route } from "react-router-dom";
+// App.jsx
 
-// 🔥 NOTE: Global Header हटा दिया गया है। अब प्रत्येक पेज (Home, Courses, आदि)
-// अपने हेडर को अपने कंपोनेंट के अंदर रेंडर करेगा।
-// Header का नाम HomeHeader.jsx रखा गया था, इसलिए उसे यहां 'Header' के रूप में इम्पोर्ट करना भ्रमित करने वाला हो सकता है।
+import React, { useState, useRef, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
 
-// 💡 हम मान रहे हैं कि आपने HomeHeader.jsx का नाम बदलकर Header.jsx कर दिया है
-// या आप इसे 'HomeHeader' नाम से ही इम्पोर्ट कर रहे हैं जैसा कि आपकी Home.jsx फाइल में है।
-// इस कोड में, मैं इसे पूरी तरह से हटा रहा हूँ क्योंकि इसे अब पेज लेवल पर संभाला जाएगा।
-// import Header from "./components/HomeHeader"; // 🔥 REMOVED from global layout
-
+// Components
 import Footer from "./components/Footer";
-
-// Pages
-import Home from "./pages/Home";
-import Courses from "./pages/Courses";
-import Internships from "./pages/Internships";
-import Tools from "./pages/Tools";
-import Contact from "./pages/Contact";
-import Login from "./pages/Login"; 
+import RoutesConfig from "./main/RoutesConfig";
+import Login from "./Auth/Login";
 
 export default function App() {
-  return (
+// --- Global App State ---
+const [openLogin, setOpenLogin] = useState(false);
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [role, setRole] = useState(null);
+const [userId, setUserId] = useState(null);
+const storedUserRole = JSON.parse(localStorage.getItem("hc_user_role")) || {};
+const [useruidrole, setUseruidRole] = useState(storedUserRole);
+// 🛑 ADDITION: Loading state to wait for session restoration
+const [authLoaded, setAuthLoaded] = useState(false); 
+
+// Session object as single source of truth
+const sessionRef = useRef({ token: null, user: null });
+
+
+// ✅ Session Restoration: Check localStorage on component mount
+useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const userDataString = localStorage.getItem("userRoleData");
+
+    if (token && userDataString) {
+        try {
+            const userData = JSON.parse(userDataString);
+            
+            // 1. Update sessionRef
+            sessionRef.current = {
+                token: token,
+                ...userData,
+                user: { 
+                    uid: userData.uid, 
+                    role: userData.role, 
+                    name: userData.name, 
+                    profile: userData.profile 
+                },
+            };
+
+            // 2. Update App-level state for rendering
+            setIsLoggedIn(true);
+            setRole(userData.role);
+            setUserId(userData.uid);
+            console.log("Session restored from localStorage.");
+            
+        } catch (error) {
+            console.error("Error parsing user data:", error);
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("userRoleData");
+            setIsLoggedIn(false);
+        }
+    }
+    
+    // 🛑 IMPORTANT: Mark loading complete after checking localStorage
+    setAuthLoaded(true); 
+    
+}, []); // Run only once on mount
+
+
+// --- Helper Functions ---
+
+const handleLoginSuccess = (data) => {
+// Data comes from Login.jsx, which already handled localStorage and sessionRef update
+sessionRef.current = {
+    token: data.getToken(),
+    user: { uid: data.uid, role: data.role, name: data.name },
+};
+
+// Update App-level state for rendering
+setIsLoggedIn(true);
+setRole(data.role);
+setUserId(data.uid);
+
+setOpenLogin(false);
+};
+
+// ✅ Logout Function: Clears state and localStorage
+const handleLogout = () => {
+sessionRef.current = { token: null, user: null };
+
+// 🛑 Clears localStorage on explicit logout
+localStorage.removeItem("authToken");
+localStorage.removeItem("userRoleData");
+
+setIsLoggedIn(false);
+setRole(null);
+setUserId(null);
+setOpenLogin(false);
+};
+
+// Function to trigger login modal
+const openLoginModal = () => setOpenLogin(true);
+
+
+// 🛑 ADDITION: Wait for session restoration before rendering routes
+if (!authLoaded) {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '24px', color: '#555' }}>
+            Loading Session...
+        </div>
+    );
+}
+
+return ( 
     <BrowserRouter>
-      {/* 🛑 Header को यहां से हटा दिया गया है। 
-          यह प्रत्येक पेज के अंदर रेंडर होगा, जिससे Home पेज पर transparent overlay और
-          अन्य पेजों पर sticky header स्टाइल लागू हो सके। 
-      */}
-      <Routes>
-        {/* Home: यह HomeHeader को isOverlay={true} के साथ रेंडर करेगा */}
-        <Route path="/" element={<Home />} /> 
-        
-        {/* अन्य पेज: ये HomeHeader को बिना किसी prop के रेंडर करेंगे (जो डिफ़ॉल्ट रूप से sticky/neo-header होगा) */}
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/internships" element={<Internships />} />
-        <Route path="/tools" element={<Tools />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      <Footer />
+        {/* Routes */}
+        <RoutesConfig
+            sessionRef={sessionRef}
+            setSession={(data) => (sessionRef.current = data)}
+            openLogin={openLoginModal}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            setRole={setRole}
+            // ✅ PASSING LOGOUT: Pass the complete handleLogout function down
+            handleLogout={handleLogout} 
+        />
+
+        {/* Footer */}
+        <Footer />
+
+        {/* Global Login Modal */}
+        {openLogin && (
+            <div
+                className="fixed-login-overlay"
+                onClick={() => setOpenLogin(false)}
+            >
+                <Login
+                    onClose={() => setOpenLogin(false)}
+                    onLogin={handleLoginSuccess}
+                    setUseruidRole={setUseruidRole}
+                />
+            </div>
+        )}
     </BrowserRouter>
-  );
+);
 }
