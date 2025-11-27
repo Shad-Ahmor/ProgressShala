@@ -9,7 +9,7 @@
   max-width: 1400px;
   margin: auto;
 }
-.career-tools-container  .tools-grid {
+.career-tools-container .tools-grid {
   display: grid;
   gap: 10px; /* reduce gap to fit more cards */
   grid-template-columns: repeat(4, 1fr) !important; /* 4 cards per row */
